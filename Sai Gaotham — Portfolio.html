@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sai Gaotham — CSE-IT, REVA University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+
+    --bg: #0A0C0F;
+    --bg-alt: #14171C;
+    --text: #ECEAE3;
+    --text-dim: #9BA1AC;
+    --accent: #6BC2B2;
+    --accent-warm: #E8A752;
+    --line: #262B33;
+    --glow: rgba(107, 194, 178, 0.28);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0A0C0F; --bg-alt: #14171C; --text: #ECEAE3; --text-dim: #9BA1AC;
+      --accent: #6BC2B2; --accent-warm: #E8A752; --line: #262B33; --glow: rgba(107, 194, 178, 0.28);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0A0C0F; --bg-alt: #14171C; --text: #ECEAE3; --text-dim: #9BA1AC;
+    --accent: #6BC2B2; --accent-warm: #E8A752; --line: #262B33; --glow: rgba(107, 194, 178, 0.28);
+  }
+  :root[data-theme="light"] {
+    --bg: #F7F5F0; --bg-alt: #EFEDE5; --text: #181B1F; --text-dim: #5B6270;
+    --accent: #1F7A6C; --accent-warm: #A8621C; --line: #DEDACE; --glow: rgba(31, 122, 108, 0.18);
+  }
+
+  * { box-sizing: inherit; }
+  html { scroll-padding-top: calc(64px + env(safe-area-inset-top, 0px)); scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(circle at 15% -5%, rgba(107, 194, 178, 0.10), transparent 40%),
+      radial-gradient(circle at 90% 15%, rgba(232, 167, 82, 0.06), transparent 35%),
+      var(--bg);
+    background-attachment: fixed;
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, .display { font-family: 'Space Grotesk', 'Inter', sans-serif; }
+  .mono { font-family: 'IBM Plex Mono', 'SF Mono', monospace; }
+
+  a { color: var(--accent); }
+
+  nav {
+    position: sticky;
+    top: 0;
+    top: env(safe-area-inset-top, 0px);
+    padding-top: calc(16px + env(safe-area-inset-top, 0px));
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 16px;
+    background: linear-gradient(var(--bg) 70%, transparent);
+    font-size: 0.85rem;
+  }
+  nav .id { color: var(--text-dim); }
+  nav .links { display: flex; gap: 20px; }
+  nav .links a { color: var(--text-dim); text-decoration: none; }
+  nav .links a:hover { color: var(--accent); }
+
+  main { max-width: 640px; margin: 0 auto; padding: 0 24px 80px; }
+
+  section { padding-top: 72px; }
+  section:first-of-type { padding-top: 40px; }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 8vw, 3.6rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+  }
+  .hero .role {
+    color: var(--text-dim);
+    font-size: 1.05rem;
+    margin: 0 0 28px;
+  }
+  .hero p.intro {
+    font-size: 1.1rem;
+    max-width: 34em;
+    margin: 0 0 24px;
+  }
+  .status {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--accent);
+    border-left: 2px solid var(--accent);
+    padding-left: 10px;
+  }
+
+  .tag {
+    display: block;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+  }
+  .tag::before { content: "$ "; color: var(--accent-warm); }
+
+  h2.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 20px;
+  }
+
+  section.about p { max-width: 34em; }
+
+  .item-list { border-top: 1px solid var(--line); }
+  .item {
+    border-bottom: 1px solid var(--line);
+    padding: 18px 0;
+    display: flex;
+    gap: 20px;
+    align-items: baseline;
+    transition: background-color .25s ease, padding-left .25s ease;
+  }
+  .item:hover { background-color: var(--bg-alt); padding-left: 8px; }
+  .item .label { font-weight: 600; min-width: 148px; flex-shrink: 0; }
+  .item .desc { color: var(--text-dim); font-size: 0.95rem; }
+
+  .skills-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+  .skill-pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    border: 1px solid var(--line);
+    padding: 8px 16px;
+    border-radius: 20px;
+    color: var(--text-dim);
+    transition: transform .25s ease, border-color .25s ease, color .25s ease;
+  }
+  .skill-pill:hover { transform: translateY(-3px); border-color: var(--accent); color: var(--accent); box-shadow: 0 0 16px var(--glow); }
+
+  .project-card {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 24px;
+    background: var(--bg-alt);
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .project-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 0 24px var(--glow); }
+  .project-card h3 { margin: 0 0 6px; font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; }
+  .project-card .status-tag {
+    display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem;
+    color: var(--accent-warm); margin-bottom: 10px;
+  }
+  .project-card p { color: var(--text-dim); margin: 0 0 14px; }
+  .project-card a { font-size: 0.9rem; text-decoration: none; }
+  .project-card a:hover { text-decoration: underline; }
+
+  .connect p { max-width: 34em; color: var(--text-dim); }
+  .connect-links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 20px; }
+  .connect-links a {
+    text-decoration: none;
+    font-size: 0.95rem;
+    border: 1px solid var(--line);
+    padding: 10px 18px;
+    border-radius: 3px;
+    color: var(--text);
+    display: inline-block;
+    transition: transform .25s ease, border-color .25s ease, color .25s ease;
+  }
+  .connect-links a:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); box-shadow: 0 0 14px var(--glow); }
+
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .hero { animation: none !important; }
+  }
+
+  footer {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 24px 24px calc(32px + env(safe-area-inset-bottom, 0px));
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero { animation: rise 0.6s ease-out; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="id mono">Sai Gaotham@reva:~$</span>
+  <div class="links">
+    <a href="#about">about</a>
+    <a href="#skills">skills</a>
+    <a href="#projects">projects</a>
+    <a href="#connect">connect</a>
+  </div>
+</nav>
+
+<main>
+
+  <section class="hero">
+    <h1>Sai Gaotham</h1>
+    <p class="role">First-year, Computer Science &amp; Information Technology — REVA University</p>
+    <p class="intro">I'm early in my computer science journey — curious about how systems and software actually fit together, and looking for a team to build alongside rather than figure things out alone.</p>
+    <span class="status mono">currently building: a daily expense calculator</span>
+  </section>
+
+  <section class="about reveal" id="about">
+    <span class="tag mono">about</span>
+    <h2 class="section-title">Where I'm starting from</h2>
+    <p>I don't have a long project list to show yet. What I do have is a habit of picking things up quickly, a genuine interest in how systems work under the hood, and a preference for working with people over working alone. I'm not looking for an easy first task — I want real responsibility, the kind that comes with actually being on a team.</p>
+  </section>
+
+  <section class="reveal" id="skills">
+    <span class="tag mono">currently-learning</span>
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <span class="skill-pill">C</span>
+      <span class="skill-pill">Python</span>
+    </div>
+  </section>
+
+  <section class="reveal" id="projects">
+    <span class="tag mono">projects</span>
+    <h2 class="section-title">What I'm building</h2>
+    <div class="project-card">
+      <span class="status-tag">● ongoing project</span>
+      <h3>Daily Expense Calculator</h3>
+      <p>An ongoing project of mine — a tool to log and total daily expenses, built while learning C and Python.</p>
+      <a href="https://github.com/saigaothamreddy-ux" target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+  </section>
+
+  <section class="reveal" id="bring">
+    <span class="tag mono">what-i-bring</span>
+    <h2 class="section-title">What I bring</h2>
+    <div class="item-list">
+      <div class="item">
+        <span class="label">Fast learner</span>
+        <span class="desc">Always looking for the next thing to pick up, on top of what I already know.</span>
+      </div>
+      <div class="item">
+        <span class="label">Problem solver</span>
+        <span class="desc">I'd rather break a hard problem down than avoid it.</span>
+      </div>
+      <div class="item">
+        <span class="label">Organized</span>
+        <span class="desc">Comfortable keeping track of tasks and priorities, my own and a team's.</span>
+      </div>
+      <div class="item">
+        <span class="label">Team player</span>
+        <span class="desc">I show up, communicate, and pull my weight.</span>
+      </div>
+      <div class="item">
+        <span class="label">Takes ownership</span>
+        <span class="desc">Ready for responsibility, and ready to put in the effort it takes.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal" id="looking">
+    <span class="tag mono">looking-for</span>
+    <h2 class="section-title">What I'm looking for</h2>
+    <div class="item-list">
+      <div class="item">
+        <span class="label">A team to join</span>
+        <span class="desc">A chance to contribute to something real on campus, not just watch from the sidelines.</span>
+      </div>
+      <div class="item">
+        <span class="label">Real responsibility</span>
+        <span class="desc">Work that actually matters to the outcome, not just busywork.</span>
+      </div>
+      <div class="item">
+        <span class="label">Mentorship</span>
+        <span class="desc">Guidance from people a few steps ahead who've already solved the problems I'm just starting to hit.</span>
+      </div>
+      <div class="item">
+        <span class="label">Room to grow</span>
+        <span class="desc">A place to build organizational and collaboration skills right alongside the technical ones.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="connect reveal" id="connect">
+    <span class="tag mono">connect</span>
+    <h2 class="section-title">Let's talk</h2>
+    <p>If you're building something on campus and want someone eager, reliable, and ready to learn fast — reach out.</p>
+    <div class="connect-links">
+      <a href="mailto:Saigaothamreddy@gmail.com">Saigaothamreddy@gmail.com</a>
+      <a href="https://github.com/saigaothamreddy-ux" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/saigaotham/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://instagram.com/ksg.nocturne" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="mono">Sai Gaotham · cse-it · reva university</span>
+</footer>
+
+<script>
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var els = document.querySelectorAll('.reveal');
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  els.forEach(function (el) { obs.observe(el); });
+})();
+</script>
+</body>
+</html>
