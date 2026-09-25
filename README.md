@@ -8,8 +8,3 @@ A minimal, responsive personal portfolio website built with HTML and custom CSS.
 * HTML5
 * CSS3 (Flexbox, CSS Variables, Responsive Design)
 
-## Local Setup
-To view this project locally, clone the repository and open the `index.html` file in your browser:
-
-```bash
-git clone [https://github.com/saigaothamreddy-ux/Saigaotham-portfolio.git](https://github.com/saigaothamreddy-ux/Saigaotham-portfolio.git)
